@@ -2,7 +2,6 @@ import threading
 from bs4 import BeautifulSoup
 import json
 
-from utils.emitter import Emitter
 from utils.schedule import SimpleTasking
 from utils.data import RetrieveHtml
 
@@ -118,22 +117,19 @@ def Routine():
     #print(">>Done!")
     #print("=-"* 10)
     
-#emiter setup
-emitter.on('execute-task-crawler', Routine)
-
 #setup execution time to tasking manager
-scheduling.on('08:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('10:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('12:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('15:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('18:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('20:02:00', lambda: emitter.emit('execute-task-crawler'))
-scheduling.on('22:02:00', lambda: emitter.emit('execute-task-crawler'))
+scheduling.on('08:02:00', Routine)
+scheduling.on('10:02:00', Routine)
+scheduling.on('12:02:00', Routine)
+scheduling.on('15:02:00', Routine)
+scheduling.on('18:02:00', Routine)
+scheduling.on('20:02:00', Routine)
+scheduling.on('22:02:00', Routine)
 
 scheduling.start()
 
-#realize routine emiting routine 
-emitter.emit('execute-task-crawler')
+#realize routine
+Routine()
 
 #main loop(keep script open)
 while True:
