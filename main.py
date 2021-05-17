@@ -5,7 +5,6 @@ import json
 from utils.schedule import SimpleTasking
 from utils.data import RetrieveHtml
 
-emitter = Emitter()
 scheduling = SimpleTasking()
 
 ###########################################################
